@@ -1,16 +1,15 @@
 <div>
-    <input type="button" value="Retour" id="listeComplete">
+    <button class="btn btn-default btn-block" type="button" id="retourPageBarman"> Ma page </button>
             
-            <p id="output" style="border-style: solid">
-    
-            </p>
+            <div id="bloque" style="border-style: solid">
+            </div>
 </div>
 
     <script type="text/javascript">
     	
         $(document).ready(function(event) {
 
-            $("#listeComplete").css("width","10%");
+
   $.ajax({
     url: "v1/Biere",
     data: {
@@ -22,17 +21,17 @@
 
       var tab = JSON.stringify(json);
       var res =JSON.parse(tab);
-
-        $("<ul>").appendTo('#output');
-    $("</tr>").appendTo('#output');  
+      var tableau = "";
+      tableau +="<tr class =\"w3-green\"> <th> col1 </th> <th> col2 </th> <th> col3</th> <th> col4 </th></tr>";
       for (var i = 0;i<res.length;i++){
-             $("<li><input type=\"button\" value=\"Commander\" id=\"Commander"+i+"\"></br>nom : "+res[i].nom+"</br>prix : "+res[i].prix+"</br>taille : "+res[i].taille+"</li></br>").appendTo('#output');
-             $("#Commander"+i).css("width","10%");
+             tableau +="<tr class =\"w3-white\"><td><button class=\"btn btn-default btn-block\" type=\"button\" id=\"Commander"+res[i].bno+"\">Commander</button></td><td>nom : "+res[i].nom+"</td><td>prix : "+res[i].prix+"</td><td>taille : "+res[i].taille+"</td></tr>";
+             //$("#Commander"+res[i].bno).css("width","100%  ");
     }
-        $("</ul>").appendTo('#output');
+
+        $("<table class=\"w3-table w3-striped w3-bordered\">" + tableau +"</table>").appendTo('#bloque');
       
     },
-    // Code to run if the request fails; the raw request and
+    // Code to run if the request fails; the raw request and<input type=\"button\" value=\"Commander\" id=\"Commander\""+res[i].bno+"> 
     // status codes are passed to the function
     error: function( xhr, status, errorThrown ) {
         alert( "Sorry, there was a problem!" );
@@ -46,6 +45,13 @@
     }
   });
       });
+
+
+
+    $("#retourPageBarman").click(function(event){
+        event.preventDefault();
+        pageBarman();
+    });
 
     </script>
 
