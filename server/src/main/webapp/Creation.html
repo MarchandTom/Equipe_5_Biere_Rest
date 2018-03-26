@@ -1,0 +1,64 @@
+<div id="creation" class="card card-container" >
+    <div class="container">
+        <div class="row col-md-3">
+            <div class="form-group">
+                <h1 class="util">Utilisateur:</h1>
+                <form>
+                    <!-- <label class="checkBoxBrasseur"><input id="boxBrasseur" type="radio" name="usertype" > Vous êtes un brasseur</label></br>
+                    <label class="checkBoxBarman"><input  id="boxBarman" type="radio" name="usertype"> Vous êtes un barman</label></br>
+                    <label class="checkBoxCE"><input  id="boxCE" type="radio" name="usertype"> Vous êtes un comité d'entreprise</label> -->
+                    Vous êtes: 
+                    <select id="type">
+                        <option value="brasseur">Brasseur</option>
+                        <option value="barman">Barman</option>
+                        <option value="comiteEnt">Comité d'entreprise</option>
+                    </select>
+                    <input type="text" name="nomUser" id="nomUser" placeholder="Nom " class="form-control"/></br> 
+                    <input type="text" name="prenomUser" id="prenomUser" placeholder="Prénom" class="form-control"/></br>
+                    <input type="text" name="enseigne" id="enseigne" placeholder="Votre enseigne " class="form-control"/></br> 
+                    <input type="text" name="siret" id="siret" placeholder="Votre siret " class="form-control"/></br> 
+                    <input type="email" name="email" id="email" placeholder="Email " class="form-control"/></br>
+                    <input type="password" name="passwd" id="passwd" placeholder="Mot de passe " class="form-control"/></br>
+                    <input type="text" name="adresse" id="adresse" placeholder="Votre adresse" class="form-control"/></br>
+                    <input type="tel" name="tel" id="tel" placeholder="telephone " class="form-control"/></br>  
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" id="post"> Valider</button></br>
+                    <button type="button" id="retour" class="btn btn-default btn-block">Retour à l'identification</button>
+                </form>
+            </div>
+        </div>
+    </div>
+            <!-- <div class="btn-group" role="group">
+                <button type="button" id="get" class="btn btn-default">Lire</button>
+                <button type="button" id="post" class="btn btn-primary">Sauver</button>
+                <button type="button" id="list" class="btn btn-warning">Lister</button>
+                
+            </div> -->
+    <script type="text/javascript">
+        /*$("#get").click(function (event) {
+                    event.preventDefault();
+                    getUser($('#user').val(), $('#alias').val())
+        });
+        $("#list").click(function (event) {
+                    event.preventDefault();
+                    listUsers()
+                    });
+        */
+        $("#retour").click(function(event){
+            pageLog();
+        });
+
+        $("#post").click(function (event) {
+            event.preventDefault();
+            postUser(
+            $('#type').val(),
+            $('#nomUser').val(),
+            $('#prenomUser').val(),
+            $('#enseigne').val(),
+            $('#siret').val(),
+            $('#email').val(),
+            $('#passwd').val(),
+            $('#adresse').val(),
+            $('#tel').val())
+            });
+    </script>
+</div>

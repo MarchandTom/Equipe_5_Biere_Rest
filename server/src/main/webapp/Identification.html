@@ -1,0 +1,51 @@
+<div id="identification">
+    <div class="container">
+        <div class="card card-container">   
+            <img id="profile-img" class="profile-img-card" src="http://www.grapheine.com/wp-content/uploads/2016/08/subway-logo-sign-arrows.gif" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" id="userlogin" class="form-control" placeholder="Adresse mail" required autofocus>
+                <input type="password" id="passwdlogin" class="form-control" placeholder="Mot de passe" required>
+                <!-- <div id="remember" class="checkbox">
+                Pas obligatoire et prioritaire pour le moment 
+                    <label>
+                        <input type="checkbox" value="remember-me"> Se souvenir de moi
+                    </label>
+                </div>-->
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" id="login"> Connexion </button>
+            </form><!-- /form -->
+            <button type="button" id="creer" class="btn btn-default btn-block">Créer un compte !</button>
+            <a href="#" class="forgot-password"> Mot de passe oublié? </a>
+            <button type="button" id="retouraccueil" class="btn btn-default btn-block">Retour à l'accueil</button>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+
+    <script type="text/javascript">
+        $("#creer").click(function(event) {
+                    event.preventDefault();
+                    afficheCreation();
+        });
+
+        $("#login").click(function (event) {
+                    event.preventDefault();
+                    login();
+                    document.getElementById("userlogin").value = "";
+                    document.getElementById("passwdlogin").value = "";
+                    });
+
+        $("#retouraccueil").click(function(event) {
+            console.log("Identification.html, retour accueil");
+                /*var menu = new Array("#barre_accueil","#slider-photos","#services","#pied-de-page");
+                  var i;
+                  event.preventDefault();
+                $("#identification").hide();
+                  for (i = 0 ; i < menu.length ; i++) {
+                    $(menu[i]).show();
+                    }*/
+/*                    $("#contenuPage").load("slider-photos.html");*/
+            retourMenu();
+
+            });
+    </script>
+</div>

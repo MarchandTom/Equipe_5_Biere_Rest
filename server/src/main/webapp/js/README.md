@@ -1,0 +1,1 @@
+##Si jamais il y a un bug, essayer de remplacer les $("#id") pour faire ref à des objets par un Document.getElementById("id")
