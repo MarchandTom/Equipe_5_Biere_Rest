@@ -29,8 +29,8 @@ function pageLog(){
 	}
 }
 
-/*function ajoutCommande(bno, uno){
-	postCommandeGeneric(bno, uno,"v1/CmdB");
+function ajoutCommande(bno){
+	postCommandeGeneric(bno, uno_utilisateur_actu,"v1/CmdB");
 }
 
 function postCommandeGeneric(bno, uno, url) {
@@ -44,17 +44,16 @@ function postCommandeGeneric(bno, uno, url) {
 			"bno" : bno,
 			"qte" : 1,
 			"uno" : uno,
-			"id" : 0
+			"cno" : 0
 		}),
 		success : function(data, textStatus, jqXHR) {
-			alert("La commande a bien été prise en compte.");
-			pageBrasseur();
+			console.log("La commande a bien été prise en compte.");
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			console.log('postCommande error: ' + textStatus);
 		}
 	});
-}*/
+}
 
 function getUser(name) {
 	getUserGeneric(name, "v1/Utilisateur/");
