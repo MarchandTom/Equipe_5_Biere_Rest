@@ -1,0 +1,50 @@
+Ce qui a été réussi: 
+-On a réussi a réaliser un biere...
+
+Ce qui a n'a pas été réussi
+
+-..Jusqu'a ce que le changement brutal et imprévu a tous causé la destruction du serveur
+
+Ce qu'on doit améliorer :
+-REDEMARRER LE GIT ....
+
+
+
+
+Rétrospective de sprint
+
+Nom du scrum master du sprint : Script
+-On a réalisé un serveur qui marchait
+-...Qu'il ne contienait pas de bug ...
+-..Dont un changement brutal a causé..
+-...Détruisant tous le serveur....
+
+
+Ce que nous allons faire durant le prochain sprint
+-Redemarrer le serveur
+-Recommencer .....
+
+Donnez ici la liste des histoires utilisateurs que vous vous engagez à terminer durant le prochain sprint.
+
+
+PDCA
+
+
+Qu'avons nous testé durant ce sprint ?
+
+
+Qu'avons nous observé ?
+
+
+Quelle décision prenons nous suite à cette expérience ?
+
+
+Qu'allons nous tester durant les 2 prochaines heures ?
+
+
+À quoi verra-t-on que celà à fonctionné ?
+
+
+Mémo
+
+N'oubliez pas d'ajouter une photo du radiateur d'information au moment de la rétrospective.
