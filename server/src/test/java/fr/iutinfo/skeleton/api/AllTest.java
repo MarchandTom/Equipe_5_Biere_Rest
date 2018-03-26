@@ -1,5 +1,7 @@
 package fr.iutinfo.skeleton.api;
 
+import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
+import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 import static org.junit.Assert.*;
 
 import java.sql.DatabaseMetaData;
@@ -188,7 +190,7 @@ public class AllTest {
 		return hasher.hash().toString();
 	}
 
-	private static boolean tableExist(String tableName) throws SQLException {
+	static boolean tableExist(String tableName) throws SQLException {
         DatabaseMetaData dbm = BDDFactory.getDbi().open().getConnection().getMetaData();
         ResultSet tables = dbm.getTables(null, null, tableName, null);
         boolean exist = tables.next();
@@ -230,7 +232,10 @@ public class AllTest {
 			a.getBiereByBno(1);
 			fail("HTTP 202 Found");
 		}catch(WebApplicationException WAE) {}
-		
+		try {	
+			a.getAllBieres("Ce n'est pas search qu'il faut mettre");
+			fail("HTTP 202 Founded");
+		}catch(Exception WAE) {}
 	}
 	
 	@Test
@@ -330,8 +335,20 @@ public class AllTest {
 			resc.getCmdBByCno(2);	
 			fail("Ca devrai pas exister");
 		}catch(Exception web){ }
+		try {
+			resc.getAllCmdB("search n'existe pas").get(0);//Ne provoque une erreur si la liste est vide
+			fail("Il est cense d'avoir une erreur !!!");
+		}catch(Exception web) {};
+		try {
+			resc.getCmdBByUno("Uno n'est pas un string ,j'averti ce parametre").get(0);	
+			fail("Ca devrai pas exister");
+		}catch(Exception web){ }
 			
 	}	
+	
+	
+	
+	
 	private static List<Utilisateur> toutInitier(){
 		List<Utilisateur> ca=new ArrayList<Utilisateur>();
 		ca.add(new Utilisateur("prenoms", "nom","enseigne","siret","email","mdp","addrqsfqfesse","tel", "type","passqswdHash","RfIP"));
