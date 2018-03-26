@@ -29,6 +29,33 @@ function pageLog(){
 	}
 }
 
+/*function ajoutCommande(bno, uno){
+	postCommandeGeneric(bno, uno,"v1/CmdB");
+}
+
+function postCommandeGeneric(bno, uno, url) {
+	console.log("postCommandeGeneric " + url)
+	$.ajax({
+		type : 'POST',
+		contentType : 'application/json',
+		url : url,
+		dataType : "json",
+		data : JSON.stringify({
+			"bno" : bno,
+			"qte" : 1,
+			"uno" : uno,
+			"id" : 0
+		}),
+		success : function(data, textStatus, jqXHR) {
+			alert("La commande a bien été prise en compte.");
+			pageBrasseur();
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			console.log('postCommande error: ' + textStatus);
+		}
+	});
+}*/
+
 function getUser(name) {
 	getUserGeneric(name, "v1/Utilisateur/");
 }

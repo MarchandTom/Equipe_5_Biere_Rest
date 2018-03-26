@@ -22,9 +22,12 @@
       var tab = JSON.stringify(json);
       var res =JSON.parse(tab);
       var tableau = "";
-      tableau +="<tr class =\"w3-green\"> <th> col1 </th> <th> col2 </th> <th> col3</th> <th> col4 </th></tr>";
+      tableau +="<tr class =\"w3-green\"> <th> commander </th> <th> Nom </th> <th> Prix</th> <th> Taille </th></tr>";
       for (var i = 0;i<res.length;i++){
-             tableau +="<tr class =\"w3-white\"><td><button class=\"btn btn-default btn-block\" type=\"button\" id=\"Commander"+res[i].bno+"\">Commander</button></td><td>nom : "+res[i].nom+"</td><td>prix : "+res[i].prix+"</td><td>taille : "+res[i].taille+"</td></tr>";
+             tableau +="<tr class =\"w3-white\"><td><button class=\"w3-button w3-green\" type=\"button\" id=\"Commander"+res[i].bno+"\" onCLick=\"Commande("+res[i].bno+","+res[i].uno+")\">Commander</button></td><td>"
+
+
+             +res[i].nom+"</td><td>"+res[i].prix+"</td><td>"+res[i].taille+"</td></tr>";
              //$("#Commander"+res[i].bno).css("width","100%  ");
     }
 
@@ -47,6 +50,10 @@
       });
 
 
+    function Commande(bno, uno){
+        console.log("ta cliqué sur un bouton");
+        ajoutCommande(bno, uno);
+    };
 
     $("#retourPageBarman").click(function(event){
         event.preventDefault();
