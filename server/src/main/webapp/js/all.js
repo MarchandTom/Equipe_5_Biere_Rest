@@ -16,7 +16,7 @@ function pageLog(){
 		document.getElementById("piedDePage").innerHTML = "";
 
 		$("body").css({
-			'background-image' :'url(https://thumbs.dreamstime.com/b/fond-vert-et-jaune-44679306.jpg)',
+			'background-image' :'images/slider/bierefond2.jpg',
 			'background-size':'cover'
 		});
 	}else{
@@ -124,7 +124,7 @@ function pageDepotBiere(){
 		document.getElementById("piedDePage").innerHTML = "";
 
 		$("body").css({
-		'background-image' :'url(https://thumbs.dreamstime.com/b/fond-vert-et-jaune-44679306.jpg)',
+		'background-image' :'url(https://fac.img.pmdstatic.net/fit/http.3A.2F.2Fwww.2Efemmeactuelle.2Efr.2Fvar.2Ffemmeactuelle.2Fstorage.2Fimages.2Fcuisine.2Fguides-cuisine.2Ftout-savoir-sur-la-biere-24220.2F13639150-1-fre-FR.2Ftout-savoir-sur-la-biere.2Ejpg/748x372/quality/80/crop-from/center/tout-savoir-sur-la-biere.jpeg)',
 		'background-size':'cover'
 	});
 	}else if(type_utilisateur_actu!=""){
@@ -144,13 +144,37 @@ function pageAffichageToutesLesBieresAdmin(){
 		document.getElementById("piedDePage").innerHTML = "";
 
 		$("body").css({
-		'background-image' :'url(https://thumbs.dreamstime.com/b/fond-vert-et-jaune-44679306.jpg)',
+		'background-image' :'url(http://www.hd-wallpaper.images-fonds.com/modules/mg3/albums/Alcool_(alcohol)_Wallpaper_HD/Biere/Biere_HD_wallpaper_0018.jpg)',
 		'background-size':'cover'
 	});
 	}
 	else if(type_utilisateur_actu!=""){
 		retourMenu();
 	}else{
+		pageLog();
+	}
+}
+
+function pageAffichageTousLesUtilisateursAdmin(){
+	console.log("Avant verif");
+	if(type_utilisateur_actu=="admin"){
+		console.log("Admin ok");
+		document.getElementById("hautDePage").style.display = 'none';
+
+		$("#contenuPage").load("affichage_utilisateurs.html");
+		console.log("ici on doit afficher l'html");
+
+		document.getElementById("piedDePage").innerHTML = "";
+
+		$("body").css({
+		'background-image' :'url(https://fac.img.pmdstatic.net/fit/http.3A.2F.2Fwww.2Efemmeactuelle.2Efr.2Fvar.2Ffemmeactuelle.2Fstorage.2Fimages.2Fcuisine.2Fguides-cuisine.2Ftout-savoir-sur-la-biere-24220.2F13639150-1-fre-FR.2Ftout-savoir-sur-la-biere.2Ejpg/748x372/quality/80/crop-from/center/tout-savoir-sur-la-biere.jpeg)',
+		'background-size':'cover'
+	});
+	}
+	else if(type_utilisateur_actu!=""){
+		retourMenu();
+	}else{
+		console.log("Pas admin");
 		pageLog();
 	}
 }
@@ -165,7 +189,7 @@ function pageAffichageToutesLesBieres(){
 		document.getElementById("piedDePage").innerHTML = "";
 
 		$("body").css({
-		'background-image' :'url(https://thumbs.dreamstime.com/b/fond-vert-et-jaune-44679306.jpg)',
+		'background-image' :'url(http://www.hd-wallpaper.images-fonds.com/modules/mg3/albums/Alcool_(alcohol)_Wallpaper_HD/Biere/Biere_HD_wallpaper_0018.jpg)',
 		'background-size':'cover'
 	});
 	}
@@ -337,7 +361,7 @@ function afficheCreation() {
 	document.getElementById("piedDePage").innerHTML = "";
 
 	$("body").css({
-		'background-image' :'url(https://thumbs.dreamstime.com/b/fond-vert-et-jaune-44679306.jpg)',
+		'background-image' :'url(http://www.hd-wallpaper.images-fonds.com/modules/mg3/albums/Alcool_(alcohol)_Wallpaper_HD/Biere/Biere_HD_wallpaper_0018.jpg)',
 		'background-size':'cover'
 	});
 }
@@ -355,4 +379,10 @@ function retourMenu() {
 	/*document.getElementById('deposerBiere').innerHTML="bonjour toi";*/
 /*	$("#creation").hide();
 $("#identification").show();*/
+}
+
+function retourAccueilAdmin() {
+	document.getElementById("hautDePage").style.display = 'block';
+	$("#contenuPage").load("AdminPageAccueil.html"); 
+
 }

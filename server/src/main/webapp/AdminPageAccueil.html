@@ -1,44 +1,23 @@
 <div>
-    <div class="container">
-        <div class="card card-container"> 
+    <div class="container" >
+        <div class="card card-container" style="margin-top: 10%"> 
         <div id="listerBieresBarm">
-       	<button class="btn btn-default btn-block" type="button" id="listerUtilisateurs"> Lister les utilisateurs </button>
+       	<button class="btn btn-default btn-block" type="button" id="listerUtilisateurs"> Lister les utilisateurs</button>
        	<button class="btn btn-default btn-block" type="button" id="listerBieres"> Lister les bières </button>
        	</div>
 </div>
 </div>
 <script type="text/javascript">
 		$(document).ready(function(){
-			
-
-
-		function listBieres() {
-			listUsersGeneric("v1/Biere");
-		}
-
-
-		function listUsersGeneric(url) {
-			$.getJSON(url, function(data) {
-				afficheListUsers(data);
-			});
-		}
-
-		function afficheListUsers(data) {
-			var ul = document.createElement('ul');
-			ul.className = "list-group";
-			var index = 0;
-			for (index = 0; index < data.length; ++index) {
-			    var li = document.createElement('li');
-			    li.className = "list-group-item";
-				li.innerHTML = data[index].nom;
-				ul.appendChild(li);
-			}
-			$("#listeBieresBarm").html(ul);
-		}
 
 		$("#listerBieres").click(function(event){
 			event.preventDefault();
 			pageAffichageToutesLesBieresAdmin();
+		});
+		$("#listerUtilisateurs").click(function(event){
+			event.preventDefault();
+			console.log("click fait pour lister utilisateurs");
+			pageAffichageTousLesUtilisateursAdmin();
 		});
 
 		$("#retouraccueil").click(function(event) {
