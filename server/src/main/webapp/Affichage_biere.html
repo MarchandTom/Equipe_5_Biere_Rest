@@ -1,0 +1,53 @@
+<div>
+    <input type="button" value="Retour" id="listeComplete">
+            
+            <p id="output" style="border-style: solid">
+    
+            </p>
+</div>
+
+    <script type="text/javascript">
+    	
+        $(document).ready(function(event) {
+
+            $("#listeComplete").css("width","10%");
+  $.ajax({
+    url: "v1/Biere",
+    data: {
+        id: 123
+    },
+    type: "GET",
+    dataType : "json",
+    success: function( json ) {
+
+      var tab = JSON.stringify(json);
+      var res =JSON.parse(tab);
+
+        $("<ul>").appendTo('#output');
+    $("</tr>").appendTo('#output');  
+      for (var i = 0;i<res.length;i++){
+             $("<li><input type=\"button\" value=\"Commander\" id=\"Commander"+i+"\"></br>nom : "+res[i].nom+"</br>prix : "+res[i].prix+"</br>taille : "+res[i].taille+"</li></br>").appendTo('#output');
+             $("#Commander"+i).css("width","10%");
+    }
+        $("</ul>").appendTo('#output');
+      
+    },
+    // Code to run if the request fails; the raw request and
+    // status codes are passed to the function
+    error: function( xhr, status, errorThrown ) {
+        alert( "Sorry, there was a problem!" );
+        console.log( "Error: " + errorThrown );
+        console.log( "Status: " + status );
+        console.dir( xhr );
+    },
+    // Code to run regardless of success or failure
+    complete: function( xhr, status ) {
+        console.log( "The request is complete!" );
+    }
+  });
+      });
+
+    </script>
+
+
+</div>

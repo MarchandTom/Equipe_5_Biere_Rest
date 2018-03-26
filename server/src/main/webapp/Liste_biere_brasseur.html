@@ -1,10 +1,10 @@
 <div>
 	<div class="container">
-        <div class="row col-md-4">
+
 			<div id="listeBieresBrasseur"></div>
 			<button type="button" id="ajoutBiere" class="btn btn-default btn-block">Ajouter une bière</button>
             <button type="button" id="retouraccueil" class="btn btn-default btn-block">Menu</button>
-		</div>
+
 	</div>
 
 <!-- 	<script src="modifDansPages"></script> -->
@@ -27,16 +27,107 @@
 		}
 
 		function afficheListUsers(data) {
-			var ul = document.createElement('ul');
-			ul.className = "list-group";
+			    console.log("data :" +  data[0]);
+			var table = document.createElement('table');
+			table.className = "w3-table w3-striped w3-bordered";
 			var index = 0;
-			for (index = 0; index < data.length; ++index) {
-			    var li = document.createElement('li');
-			    li.className = "list-group-item";
-				li.innerHTML = data[index].nom;
-				ul.appendChild(li);
+
+			console.log("length: "+ data.length);
+			var col = document.createElement('tr');
+			col.className = "w3-green";
+			console.log("data 0 : " + data[0]);
+
+
+			for (var i = 0; i < 7; i++) {
+				var colonne = document.createElement('th');
+				switch (i) {
+ 				case 0:
+   					colonne.innerHTML = "bno";
+   					col.appendChild(colonne);
+    				break;
+    			case 1:
+   					colonne.innerHTML = "degré";
+   					col.appendChild(colonne);
+    				break;
+    			case 2:
+   					colonne.innerHTML = "nom";
+    				col.appendChild(colonne);
+    				break;
+    			case 3:
+   					colonne.innerHTML = "pno";
+   					col.appendChild(colonne);
+    				break;
+    			case 4:
+   					colonne.innerHTML = "prix";
+   					col.appendChild(colonne);
+    				break;
+    			case 5:
+   					colonne.innerHTML = "taille";
+   					col.appendChild(colonne);
+    				break;
+    			case 6:
+   					colonne.innerHTML = "uno";
+   					col.appendChild(colonne);
+    				break;
+				}
 			}
-			$("#listeBieresBrasseur").html(ul);
+
+			table.appendChild(col);
+
+			for (var j = 0; j < data.length ; j++) {
+				var tr = document.createElement('tr');
+			    tr.className = "w3-white";
+
+			for (index = 0; index < 7 ; index++) {
+			    var td = document.createElement('td');
+
+			    switch (index) {
+ 				case 0:
+   					td.innerHTML = "bno " + data[j].bno;
+   					console.log("bno : " + data[j].bno);
+					tr.appendChild(td);
+    				break;
+    			case 1:
+   					td.innerHTML = "degre "  + data[j].degre;
+   					console.log("degre : " + data[j].degre);
+					tr.appendChild(td);
+    				break;
+    			case 2:
+   					td.innerHTML = "nom "  + data[j].nom;
+   					console.log("nom : " + data[j].nom);
+					tr.appendChild(td);
+    				break;
+    			case 3:
+   					td.innerHTML = "pno "  + data[j].pno;
+   					console.log("pno : " + data[j].pno);
+					tr.appendChild(td);
+    				break;
+    			case 4:
+   					td.innerHTML = "prix "  + data[j].prix;
+   					console.log("prix : " + data[j].prix);
+					tr.appendChild(td);
+    				break;
+    			case 5:
+   					td.innerHTML = "taille "  + data[j].taille;
+   					console.log("taille : " + data[j].taille);
+					tr.appendChild(td);
+    				break;
+    			case 6:
+   					td.innerHTML = "uno "  + data[j].uno;
+   					console.log("uno : " + data[j].uno);	
+					tr.appendChild(td);
+    				break;
+    				default:
+    				td.innerHTML = "- " ;
+					tr.appendChild(td);
+				}
+					table.appendChild(tr);	
+			}
+
+					
+		}
+
+			$("#listeBieresBrasseur").html(table);
 		}
 
 		$("#ajoutBiere").click(function(event){

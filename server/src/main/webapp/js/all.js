@@ -45,6 +45,7 @@ function login() {
 	console.log(identificationLogin+"  "+motDePasse);
 	getWithAuthorizationHeader("v1/Utilisateur", function(data){
 		if(data!=null){
+		console.log("on est rentré dans le data != null");
 			var mot="";
 			for(var i=0;i<data.length; i++){
 				if(data[i].email==identificationLogin && data[i].mdp==motDePasse){
@@ -77,6 +78,22 @@ function login() {
 }
 
 function pageBarman(){
+	if(type_utilisateur_actu=="barman"){
+			document.getElementById("hautDePage").style.display = 'none';
+
+			$("#contenuPage").load("Liste_biere_barman.html");
+
+			document.getElementById("piedDePage").innerHTML = "";
+
+			$("body").css({
+			'background-image' :'url(https://fac.img.pmdstatic.net/fit/http.3A.2F.2Fwww.2Efemmeactuelle.2Efr.2Fvar.2Ffemmeactuelle.2Fstorage.2Fimages.2Fcuisine.2Fguides-cuisine.2Ftout-savoir-sur-la-biere-24220.2F13639150-1-fre-FR.2Ftout-savoir-sur-la-biere.2Ejpg/748x372/quality/80/crop-from/center/tout-savoir-sur-la-biere.jpeg)',
+			'background-size':'cover'
+		});
+		}else if(type_utilisateur_actu!=""){
+			retourMenu();
+		}else{
+			pageLog();
+		}
 }
 
 function pageBrasseur(){
@@ -117,12 +134,69 @@ function pageDepotBiere(){
 	}
 }
 
+function pageAffichageToutesLesBieresAdmin(){
+	if(type_utilisateur_actu=="admin"){
+		document.getElementById("hautDePage").style.display = 'none';
+
+		$("#contenuPage").load("Affichage_biere.html");
+		console.log("ici on doit afficher l'html");
+
+		document.getElementById("piedDePage").innerHTML = "";
+
+		$("body").css({
+		'background-image' :'url(https://thumbs.dreamstime.com/b/fond-vert-et-jaune-44679306.jpg)',
+		'background-size':'cover'
+	});
+	}
+	else if(type_utilisateur_actu!=""){
+		retourMenu();
+	}else{
+		pageLog();
+	}
+}
+
+function pageAffichageToutesLesBieres(){
+	if(type_utilisateur_actu=="barman"){
+		document.getElementById("hautDePage").style.display = 'none';
+
+		$("#contenuPage").load("Affichage_biere.html");
+		console.log("ici on doit afficher l'html");
+
+		document.getElementById("piedDePage").innerHTML = "";
+
+		$("body").css({
+		'background-image' :'url(https://thumbs.dreamstime.com/b/fond-vert-et-jaune-44679306.jpg)',
+		'background-size':'cover'
+	});
+	}
+	else if(type_utilisateur_actu!=""){
+		retourMenu();
+	}else{
+		pageLog();
+	}
+}
+
 function pageComiteEnt(){
 	
 }
 
 function pageAdmin(){
-	
+	if(type_utilisateur_actu=="admin"){
+		document.getElementById("hautDePage").style.display = 'none';
+
+		$("#contenuPage").load("AdminPageAccueil.html");
+
+		document.getElementById("piedDePage").innerHTML = "";
+
+		$("body").css({
+		'background-image' :'url(https://fac.img.pmdstatic.net/fit/http.3A.2F.2Fwww.2Efemmeactuelle.2Efr.2Fvar.2Ffemmeactuelle.2Fstorage.2Fimages.2Fcuisine.2Fguides-cuisine.2Ftout-savoir-sur-la-biere-24220.2F13639150-1-fre-FR.2Ftout-savoir-sur-la-biere.2Ejpg/748x372/quality/80/crop-from/center/tout-savoir-sur-la-biere.jpeg)',
+		'background-size':'cover'
+	});
+	}else if(type_utilisateur_actu!=""){
+		retourMenu();
+	}else{
+		pageLog();
+	}
 }
 
 function profile() {
