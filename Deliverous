@@ -1,5 +1,5 @@
 java:
-  image: equipe5biere/marchant
+  image: equipe5biere/equipe_5_biere_rest
   ports:
   - ip: 178.33.45.178
     container_port: 8080
