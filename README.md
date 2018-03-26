@@ -88,7 +88,7 @@ Si tout se passe bien, vous devriez voir la page d'accueil du projet.
 # Test de déploiement sur `deliverous.com`
 
 Reportez vous [au document décrivant l'usage de Docker](doc/docker.md)
-
+ 
 # Quelques liens utiles
 - [Documentation de `Jersey`](https://jersey.java.net/documentation/latest/index.html)
 - [Explication de JAX-RS avec Jersey](http://coenraets.org/blog/2011/12/restful-services-with-jquery-and-java-using-jax-rs-and-jersey)
