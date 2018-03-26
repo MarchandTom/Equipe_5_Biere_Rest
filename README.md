@@ -95,4 +95,4 @@ Reportez vous [au document décrivant l'usage de Docker](doc/docker.md)
 - [Aide sur les IHM en java avec Jersey](http://thierry-leriche-dessirier.developpez.com/tutoriels/java/client-swing-menus-filtres-rest-service/)
 - [Framework HTML/CSS/JS Bootstrap](http://getbootstrap.com)
 
-# ATTENTION AU QUOTA POUR L'INSTALLATION PENSEZ A VIDE VOTRE CORBEILLE
+# ATTENTION AU QUOTA POUR L'INSTALLATION PENSEZ A VIDE VOTRE CORBEILLE test
