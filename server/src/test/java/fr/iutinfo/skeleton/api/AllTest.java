@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.ws.rs.WebApplicationException;
 
+import org.glassfish.hk2.utilities.reflection.Logger;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.base.Charsets;
@@ -27,6 +29,15 @@ import fr.iutinfo.skeleton.api.Biere;
 import fr.iutinfo.skeleton.api.BiereDao;
 import fr.iutinfo.skeleton.api.BiereResource;
 public class AllTest {
+	static UtilisateurResource au;
+	static BiereResource ab;
+	
+	@Before
+	public void init() throws SQLException {
+		
+		au=new UtilisateurResource();
+		ab=new BiereResource();
+	}
 	@Test
 	public void testUtilisateur() {//50.1 >50.7
 		Utilisateur a=new Utilisateur("prenoms", "nom","enseigne","siret","email","mdp","addresse",
@@ -101,8 +112,11 @@ public class AllTest {
 		if (tableExist("utilisateur")) {
 			dao.dropUtilisateurTable();
 			assertFalse("IL est la ?! ?!",tableExist("utilisateur"));
+			dao.createUtilisateurTable();
+			dao.insert(new Utilisateur("Margaret", "Thatcher", "la Dame de fer", "siretnumero", "margaret@a.com", "passwrd", "1 rue b", "0000000000" , "barman"));
 		}
-		UtilisateurResource a=new UtilisateurResource();
+		UtilisateurResource a=au;
+		au=a;
 		assertTrue("IL A DISPARU ?!",tableExist("utilisateur"));new UtilisateurResource();
 		Utilisateur use=new Utilisateur("prenoms", "nom","enseigne","siret","email","mdp","addresse",
 				"tel", "type","passwdHash","RIP");
@@ -189,8 +203,10 @@ public class AllTest {
 		if (tableExist("bieres")) {
 			dao.dropBiereTable();;
 			assertFalse("IL est la ?! ?!",tableExist("bieres"));
+			dao.createBiereTable();
+			 dao.insert(new Biere("Biere de la mort qui tue",10));
 		}
-		BiereResource a=new BiereResource();//On oublie le nouveau biere
+		BiereResource a=ab;//On oublie le nouveau biere
 		assertTrue("IL A DISPARU ?!",tableExist("bieres"));new BiereResource();
 		Biere use=new Biere("nom",1,2, 0, "forme","type", "description",00,"origine",-20,"amertume");
 		BiereDto id=a.createBiere(use.convertToDto());
@@ -249,6 +265,7 @@ public class AllTest {
 		assertEquals(cdto.getCno(),commande.getCno());
 		assertEquals(cdto.getUno(),commande.getUno());
 		assertEquals(cdto.getQte(),commande.getQte());
+		assertEquals(cdto.getBno(),commande.getBno());
 		CmdB ata=new CmdB(10,15,999);
 		cdto=ata.convertToDto();
 		assertEquals(cdto.getCno(),ata.getCno());
@@ -257,6 +274,64 @@ public class AllTest {
 	}
 	
 	
+
+	@Test
+	public void TestCommandeREssourceAvanced() throws SQLException{
+		CmdBDao dao=BDDFactory.getDbi().open(CmdBDao.class);
+		if (tableExist("cmdb")) {
+			dao.dropCmdBTable();
+			assertFalse("IL est la ?! ?!",tableExist("cmdb"));
+		}
+		CmdBResource resc=new CmdBResource();//On oublie le nouveau commande
+		assertTrue("IL A DISPARU ?!",tableExist("cmdb"));new CmdBResource();
+		BiereDao daob=BDDFactory.getDbi().open(BiereDao.class);
+	//On oublie le nouveau biere
+		
+		if (!tableExist("utilisateur")) {
+			au=new UtilisateurResource();
+		}
+		if (!tableExist("bieres")) {
+			ab=new BiereResource();
+		}
+		if (daob.all().size()<5) {//S'il y a des biere et des utilisateur on peut continuer
+			for (Biere ma:toutInitierbiere()) {
+				ab.createBiere(ma.convertToDto());
+			}
+		}
+		UtilisateurDao daou=BDDFactory.getDbi().open(UtilisateurDao.class);
+		if (daou.all().size()<5) {
+			for (Utilisateur ma:toutInitier()) {
+				au.createUtilisateur(ma.convertToDto());
+			}
+		}
+		CmdBDto dto=resc.createCmdB(new CmdB(3,2,1000).convertToDto());
+		if (daou.findById(6)==null){
+		//	fail("ID 6 inexsistance pour le utilisateur");
+		}if (daob.findByBno(4)==null){
+		//	fail("ID 4 inexsistance pour le biere");
+		}
+		//Logger.getLogger().debug("---------------------------------------------");
+		System.out.println(daou.findById(6).getPrenom() +" a commande 1000 "+daob.findByBno(4).getNom());
+		//Logger.getLogger().debug("---------------------------------------------");
+		assertEquals(2,dto.getCno());//Le 2eme est créer (1er déja crée)
+		CmdB mimi=new CmdB(1000 ,3,7,5320);
+		assertEquals(daou.findById(3).getUno(),mimi.getUno());
+		assertEquals(daob.findByBno(7).getBno(),mimi.getBno());// Le id de biere en cas ajout de certain est NULL(cas d'initialisation)
+		assertEquals(1000,mimi.getCno());
+		dto=resc.createCmdB(mimi.convertToDto());
+		assertFalse(dto.getCno()+"="+mimi.getCno(),dto.getCno()==mimi.getCno());//N'est pas affecte par 3 et non pas 1000 pour le cno
+		assertEquals(dao.findByCno(2).getQte(),1000 );//Tester les quantité
+		assertEquals(resc.getCmdBByCno(2).getQte(),1000);
+		resc.createCmdB(new CmdB(1,1,0).convertToDto());
+		//assertEquals(resc.getCmdBByUno("1"),2);//Inutile ....CNO est deja dans le cno est n'est pas uno
+		assertEquals(resc.getAllCmdB(null).size(),4);
+		resc.deleteCmdB(2);
+		try {
+			resc.getCmdBByCno(2);	
+			fail("Ca devrai pas exister");
+		}catch(Exception web){ }
+			
+	}	
 	private static List<Utilisateur> toutInitier(){
 		List<Utilisateur> ca=new ArrayList<Utilisateur>();
 		ca.add(new Utilisateur("prenoms", "nom","enseigne","siret","email","mdp","addrqsfqfesse","tel", "type","passqswdHash","RfIP"));
@@ -270,13 +345,13 @@ public class AllTest {
 	private static List<Biere> toutInitierbiere(){
 		List<Biere> ca=new ArrayList<Biere>();
 		                //nom,uno,pno,prix,forme, type,description,taille,origine,degre,amertume) {
-		ca.add(new Biere("nom",1,2, 0, "forme","type", "description",00,"origine",-20,"amertume"));	
-		ca.add(new Biere("nom",2,3, 0, "forme","ttpe", "description",00,"origine",-20,"amertume"));
-		ca.add(new Biere("nom",5,1, 0, "forme","typeqsdq", "description",00,"origine",-20,"amertume"));
-		ca.add(new Biere("nom",1,2, 0, "forme","atype", "description",00,"origine",-20,"amertume"));
-		ca.add(new Biere("nom",3,1, 0, "forme","vwtype", "description",00,"origine",-20,"amertume"));
-		ca.add(new Biere("nom",5,2, 0, "forme","typsqdqse", "description",00,"origine",-20,"amertume"));
-		ca.add(new Biere("nom",1,1, 0, "forme","typqqsqe", "description",00,"origine",-20,"amertume"));
+		ca.add(new Biere("nom parfait",1,2, 0, "forme","type", "description",00,"origine",-20,"amertume"));	
+		ca.add(new Biere("nom rien",2,3, 0, "forme","ttpe", "description",00,"origine",-20,"amertume"));
+		ca.add(new Biere("nomnonon",5,1, 0, "forme","typeqsdq", "description",00,"origine",-20,"amertume"));
+		ca.add(new Biere("biere a long",1,2, 0, "forme","atype", "description",00,"origine",-20,"amertume"));
+		ca.add(new Biere("bieuur",3,1, 0, "forme","vwtype", "description",00,"origine",-20,"amertume"));
+		ca.add(new Biere("ouim",5,2, 0, "forme","typsqdqse", "description",00,"origine",-20,"amertume"));
+		ca.add(new Biere("ouaim",1,1, 0, "forme","typqqsqe", "description",00,"origine",-20,"amertume"));
 		return ca;
 	}
 
