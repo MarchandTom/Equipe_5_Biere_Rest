@@ -1,0 +1,7 @@
+Ce qu'on a fait
+-Metre en place un BDD sans design...
+
+
+Ce que nous allons faire
+
+-Definir les tache pour demain 
