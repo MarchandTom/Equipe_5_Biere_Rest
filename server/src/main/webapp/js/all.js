@@ -16,7 +16,7 @@ function pageLog(){
 		document.getElementById("piedDePage").innerHTML = "";
 
 		$("body").css({
-			'background-image' :'images/slider/bierefond2.jpg',
+			'background-image' :'url(https://images8.alphacoders.com/413/413078.jpg)',
 			'background-size':'cover'
 		});
 	}else{
