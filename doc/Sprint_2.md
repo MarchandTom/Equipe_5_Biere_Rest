@@ -1,9 +1,11 @@
-Ce qu'on a fait
+##Ce qu'on a fait
 -Rerepartir les tache
+
 -Effectuer les premier test
 
-Ce qu'on va faire 
+##Ce qu'on va faire 
 -Refaire les nouveautés
+
 -Continuer sur les tests
 
 
