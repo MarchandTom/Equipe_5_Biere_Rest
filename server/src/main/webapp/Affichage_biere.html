@@ -53,6 +53,7 @@
     function Commande(bno){
       console.log("Commande bno : "+bno);
         ajoutCommande(bno, $("#quantite"+bno).val());
+        alert("La commande a été traitée !");
     };
 
     $("#retourPageBarman").click(function(event){

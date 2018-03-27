@@ -10,11 +10,12 @@ public interface CmdBDao {
     @SqlUpdate("CREATE TABLE cmdb(" + 
     		"	cno integer primary key autoincrement," +
     		"	uno integer," + 
-    		"	qte integer" + 
+    		"	qte integer, " + 
+    		"   bno integer" +
     		");")
     void createCmdBTable();
 
-    @SqlUpdate("insert into cmdb (uno, qte) values (:uno, :qte)")
+    @SqlUpdate("insert into cmdb (uno, qte, bno) values (:uno, :qte, :bno)")
     @GetGeneratedKeys
     int insert(@BindBean() CmdB cmdB);
 

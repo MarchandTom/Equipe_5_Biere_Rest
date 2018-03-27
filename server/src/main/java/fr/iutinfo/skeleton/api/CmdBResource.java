@@ -42,8 +42,10 @@ public class CmdBResource {
     public CmdBDto createCmdB(CmdBDto dto) { 
         CmdB cmdB = new CmdB(); 
         cmdB.initFromDto(dto); 
-        int id = dao.insert(cmdB); 
-        dto.setCno(id); 
+        int id = dao.insert(cmdB);
+        logger.debug(cmdB.toString());
+        dto.setCno(id);
+        logger.debug(""+dto.getBno());
         return dto; 
     }   
     
@@ -65,6 +67,7 @@ public class CmdBResource {
         if (cmdB == null) {
             throw new WebApplicationException(404);
         }	
+        logger.debug(cmdB.get(0).toString());
     	return cmdB;
     }
     
