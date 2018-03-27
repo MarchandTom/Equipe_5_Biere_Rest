@@ -1,58 +1,86 @@
 <div>
     <input type="button" value="Retour" id="listeComplete">
-            
-            <p id="output" style="border-style: solid">
-    
-            </p>
+
+    <p id="output" style="border-style: solid">
+
+    </p>
 </div>
 
-    <script type="text/javascript">
-    	   
-        $(document).ready(function(event) {
+<script type="text/javascript">
 
-            $("#listeComplete").css("width","10%");
-  $.ajax({
-    url: "v1/Utilisateur",
-    data: {
-        id: 123
-    },
-    type: "GET",
-    dataType : "json",
-    success: function( json ) {
+    $(document).ready(function(event) {
 
-      var tab = JSON.stringify(json);
-      var res =JSON.parse(tab);
+        console.log(".css()");
+        $("#listeComplete").css("width","10%");
+        console.log(".ajax()");
+        $.ajax({
+            url: "v1/Utilisateur",
+            data: {
+                id: 123
+            },
+            type: "GET",
+            dataType : "json",
+            success: function( json ) {
+                console.log("success()");
 
-        $("<ul>").appendTo('#output');
-    $("</tr>").appendTo('#output');  
-      for (var i = 0;i<res.length;i++){
-             $("<li></br>nom : "+res[i].nom+"</br>enseigne : "+res[i].enseigne+"</br>type: "+res[i].type+"</li></br>").appendTo('#output');
-            
-    }
-        $("</ul>").appendTo('#output');
-      
-    },
-    // Code to run if the request fails; the raw request and
-    // status codes are passed to the function
-    error: function( xhr, status, errorThrown ) {
-        alert( "Sorry, there was a problem!" );
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
-    },
-    // Code to run regardless of success or failure
-    complete: function( xhr, status ) {
-        console.log( "The request is complete!" );
-    }
-  });
+                var tab = JSON.stringify(json);
+                var res =JSON.parse(tab);
 
-    $("#listeComplete").click(function(event) {
+                $("<ul>").appendTo('#output');
+                $("</tr>").appendTo('#output');  
+                for (var i = 0;i<res.length;i++){
+                    $("<li></br>nom : "+res[i].nom+"</br>enseigne : "+res[i].enseigne+"</br>type: "+res[i].type+"</li></br>").appendTo('#output');
+                    $("<input type=\"button\" class=\"boutonSupUtilisateur\" value=\"supprimer Utilisateur "+ res[i].nom + "\" id=\""+res[i].uno+"\">").appendTo('#output');
+
+                }
+                $("</ul>").appendTo('#output');
+
+            },
+            // Code to run if the request fails; the raw request and
+            // status codes are passed to the function
+            error: function( xhr, status, errorThrown ) {
+                alert( "Sorry, there was a problem!" );
+                console.log( "Error: " + errorThrown );
+                console.log( "Status: " + status );
+                console.dir( xhr );
+            },
+            // Code to run regardless of success or failure
+            complete: function( xhr, status ) {
+                console.log( "The request is complete!" );
+            }
+        });
+        console.log(".click()");
+        // $(document).getElementsByClassName("boutonSupUtilisateur").click(function(event){
+        $("#output").on("click", ".boutonSupUtilisateur", function(event) {
+            console.log("click on supp");
+            event.preventDefault();
+            var idElt = this.getAttribute('id');
+            console.log(idElt);
+        
+            $.ajax({
+                url: "v1/Utilisateur",
+                data: {
+                    id : 124
+                },
+                type : "POST",
+                dataType : "json",
+                success: function(json) {
+                    var tableau = JSON.stringify(json);
+                    var reponse = JSON.parse(tableau);
+                }
+
+            });
+        
+        });
+
+
+        $("#listeComplete").click(function(event) {
             event.preventDefault();
             retourAccueilAdmin();
         });
-    });
+});
 
-    </script>
+</script>
 
 
 </div>
