@@ -1,14 +1,18 @@
 Ce qui a réussi
 -Docker qui a réussi
 -Tous les tests principaux fonctionnels
+-PLus d'erreur
 
-Ce qu'on aurai du améliorer
--Les promotions
--Les fonctionnalités secondaires non implémenté
+Ce qu'on va améliorer
+-Les designs
 
 Ce qu'on a fait
 -Mise en place des CSS et dde décors
 -Deploiement en cours de docker
 -Verification de stabilité de docker
 
-Ce dernier permet de conclure le projet avec des fonctionnalités ,cependant ,on n'a pas fait tous les Todo du fait que le nombres de todo est trop grand voir dépssa les 300 et qu'on a atteint que 60
+Ce qu'on va faire
+-Préparation des décors pour le salon
+-Mise a jour des testes
+
+
