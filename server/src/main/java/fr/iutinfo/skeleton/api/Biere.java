@@ -10,9 +10,9 @@ import fr.iutinfo.skeleton.common.dto.BiereDto;
 public class Biere {
     final static Logger logger = LoggerFactory.getLogger(Biere.class);
     private static Biere anonymous = new Biere("Anonymous", -1,-1,-1,"anonym","","",-1,"",-1,""); 
-    private int bno = 0;
 	private String nom;
 	private int uno;
+	private int bno;
 	private int pno;
 	private int prix;
 	private String forme;
@@ -38,9 +38,26 @@ public class Biere {
 		this.amertume = amertume;
 	}
 	
+	public Biere(int bno, String nom, int uno, int pno, int prix, String forme, String type, String description,
+			int taille, String origine, int degre, String amertume) {
+		this.nom = nom;
+		this.bno=bno;
+		this.uno = uno;
+		this.pno = pno;
+		this.prix = prix;
+		this.forme = forme;
+		this.type = type;
+		this.description = description;
+		this.taille = taille;
+		this.origine = origine;
+		this.degre = degre;
+		this.amertume = amertume;
+	}
+
 	public Biere() {
 		
 	}
+
 	
 	public Biere(String nom, int prix) {
 		this.nom = nom;
