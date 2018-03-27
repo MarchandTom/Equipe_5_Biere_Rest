@@ -24,10 +24,10 @@
       var tableau = "";
       tableau +="<tr class =\"w3-green\"> <th> Commander </th><th> Quantité </th><th> Nom </th> <th> Prix</th> <th> Taille </th></tr>";
       for (var i = 0;i<res.length;i++){
-             tableau +="<tr class =\"w3-white\"><td><button class=\"w3-button w3-green\" type=\"button\" id=\"Commander"+res[i].bno+"\" onCLick=\"Commande("+res[i].bno+")\">Commander</button></td><td>"
+        console.log(res[i].bno);
+             tableau +="<tr class =\"w3-white\"><td><button class=\"w3-button w3-green\" type=\"button\" id=\"Commander"+res[i].bno+"\" onCLick=\"Commande("+res[i].bno+")\">Commander</button></td><td><input type=\"number\" name=\"quantity\" min=\"1\" max=\"50\" style=\"width:20%\" id=\"quantite"+res[i].bno+"\"></td><td>"+
 
-
-             +res[i].nom+"</td><td>"+res[i].prix+"</td><td>"+res[i].taille+"</td></tr>";
+             res[i].nom+"</td><td>"+res[i].prix+"</td><td>"+res[i].taille+"</td></tr>";
              //$("#Commander"+res[i].bno).css("width","100%  ");
     }
 
@@ -51,7 +51,8 @@
 
 
     function Commande(bno){
-        ajoutCommande(bno);
+      console.log("Commande bno : "+bno);
+        ajoutCommande(bno, $("#quantite"+bno).val());
     };
 
     $("#retourPageBarman").click(function(event){

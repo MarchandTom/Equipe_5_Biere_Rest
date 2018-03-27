@@ -29,11 +29,11 @@ function pageLog(){
 	}
 }
 
-function ajoutCommande(bno){
-	postCommandeGeneric(bno, uno_utilisateur_actu,"v1/CmdB");
+function ajoutCommande(bno, qte){
+	postCommandeGeneric(bno, qte, uno_utilisateur_actu,"v1/CmdB");
 }
 
-function postCommandeGeneric(bno, uno, url) {
+function postCommandeGeneric(bno, qte, uno, url) {
 	console.log("postCommandeGeneric " + url)
 	$.ajax({
 		type : 'POST',
@@ -42,7 +42,7 @@ function postCommandeGeneric(bno, uno, url) {
 		dataType : "json",
 		data : JSON.stringify({
 			"bno" : bno,
-			"qte" : 1,
+			"qte" : qte,
 			"uno" : uno,
 			"cno" : 0
 		}),
@@ -78,6 +78,7 @@ function login() {
 					type_utilisateur_actu=data[i].type;
 					uno_utilisateur_actu=data[i].uno;
 					utilisateur_actu=data[i];
+					document.getElementById('logname').innerHTML="" + (data[i].nom).substring(0,15);
 					document.getElementById('boutonLogBarreAccueil').innerHTML="Déconnexion";
 					if(data[i].type=="barman"){
 						pageBarman();
