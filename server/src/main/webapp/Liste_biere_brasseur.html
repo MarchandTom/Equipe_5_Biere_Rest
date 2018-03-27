@@ -1,144 +1,152 @@
-<div>
-	<div class="container">
+<style type="text/css">
+	
+.boutons {	
+ max-width: 300px;
+flex-wrap: nowrap;
+ text-align: center;
+}
 
-			<div id="listeBieresBrasseur"></div>
-			<button type="button" id="ajoutBiere" class="btn btn-default btn-block">Ajouter une bière</button>
-            <button type="button" id="retouraccueil" class="btn btn-default btn-block">Menu</button>
-
+</style>
+<div class="container" style="padding-top: 10%">
+	<div id="listeBieresBrasseur"></div>
+	<div style="flex-wrap: nowrap;">
+		<button type="button" id="ajoutBiere" class="btn btn-default btn-block boutons">Ajouter une bière</button>
+		<button type="button" id="retouraccueil" class="btn btn-default btn-block boutons">Menu</button>
 	</div>
+</div>
 
 <!-- 	<script src="modifDansPages"></script> -->
-	<script type="text/javascript">
-		$(document).ready(function(){
-			console.log("ListageBiere");
-			listBieres();
-/*			afficheListUsers(data);*/
+<script type="text/javascript">
+	$(document).ready(function(){
+		console.log("ListageBiere");
+		listBieres();
+		/*			afficheListUsers(data);*/
+	});
+
+	function listBieres() {
+		listUsersGeneric("v1/Biere/brasseur/"+uno_utilisateur_actu);
+	}
+
+
+	function listUsersGeneric(url) {
+		$.getJSON(url, function(data) {
+			afficheListUsers(data);
 		});
+	}
 
-		function listBieres() {
-			listUsersGeneric("v1/Biere/brasseur/"+uno_utilisateur_actu);
-		}
+	function afficheListUsers(data) {
+		console.log("data :" +  data[0]);
+		var table = document.createElement('table');
+		table.className = "w3-table w3-striped w3-bordered";
+		var index = 0;
 
-
-		function listUsersGeneric(url) {
-			$.getJSON(url, function(data) {
-				afficheListUsers(data);
-			});
-		}
-
-		function afficheListUsers(data) {
-			    console.log("data :" +  data[0]);
-			var table = document.createElement('table');
-			table.className = "w3-table w3-striped w3-bordered";
-			var index = 0;
-
-			console.log("length: "+ data.length);
-			var col = document.createElement('tr');
-			col.className = "w3-green";
-			console.log("data 0 : " + data[0]);
+		console.log("length: "+ data.length);
+		var col = document.createElement('tr');
+		col.className = "w3-green";
+		console.log("data 0 : " + data[0]);
 
 
-			for (var i = 0; i < 7; i++) {
-				var colonne = document.createElement('th');
-				switch (i) {
- 				case 0:
-   					colonne.innerHTML = "bno";
-   					col.appendChild(colonne);
-    				break;
-    			case 1:
-   					colonne.innerHTML = "degré";
-   					col.appendChild(colonne);
-    				break;
-    			case 2:
-   					colonne.innerHTML = "nom";
-    				col.appendChild(colonne);
-    				break;
-    			case 3:
-   					colonne.innerHTML = "pno";
-   					col.appendChild(colonne);
-    				break;
-    			case 4:
-   					colonne.innerHTML = "prix";
-   					col.appendChild(colonne);
-    				break;
-    			case 5:
-   					colonne.innerHTML = "taille";
-   					col.appendChild(colonne);
-    				break;
-    			case 6:
-   					colonne.innerHTML = "uno";
-   					col.appendChild(colonne);
-    				break;
-				}
+		for (var i = 0; i < 7; i++) {
+			var colonne = document.createElement('th');
+			switch (i) {
+				case 0:
+				colonne.innerHTML = "bno";
+				col.appendChild(colonne);
+				break;
+				case 1:
+				colonne.innerHTML = "degré";
+				col.appendChild(colonne);
+				break;
+				case 2:
+				colonne.innerHTML = "nom";
+				col.appendChild(colonne);
+				break;
+				case 3:
+				colonne.innerHTML = "pno";
+				col.appendChild(colonne);
+				break;
+				case 4:
+				colonne.innerHTML = "prix";
+				col.appendChild(colonne);
+				break;
+				case 5:
+				colonne.innerHTML = "taille";
+				col.appendChild(colonne);
+				break;
+				case 6:
+				colonne.innerHTML = "uno";
+				col.appendChild(colonne);
+				break;
 			}
+		}
 
-			table.appendChild(col);
+		table.appendChild(col);
 
-			for (var j = 0; j < data.length ; j++) {
-				var tr = document.createElement('tr');
-			    tr.className = "w3-white";
+		for (var j = 0; j < data.length ; j++) {
+			var tr = document.createElement('tr');
+			tr.className = "w3-white";
 
 			for (index = 0; index < 7 ; index++) {
-			    var td = document.createElement('td');
+				var td = document.createElement('td');
 
-			    switch (index) {
- 				case 0:
-   					td.innerHTML = "bno " + data[j].bno;
-   					console.log("bno : " + data[j].bno);
+				switch (index) {
+					case 0:
+					td.innerHTML = "bno " + data[j].bno;
+					console.log("bno : " + data[j].bno);
 					tr.appendChild(td);
-    				break;
-    			case 1:
-   					td.innerHTML = "degre "  + data[j].degre;
-   					console.log("degre : " + data[j].degre);
+					break;
+					case 1:
+					td.innerHTML = "degre "  + data[j].degre;
+					console.log("degre : " + data[j].degre);
 					tr.appendChild(td);
-    				break;
-    			case 2:
-   					td.innerHTML = "nom "  + data[j].nom;
-   					console.log("nom : " + data[j].nom);
+					break;
+					case 2:
+					td.innerHTML = "nom "  + data[j].nom;
+					console.log("nom : " + data[j].nom);
 					tr.appendChild(td);
-    				break;
-    			case 3:
-   					td.innerHTML = "pno "  + data[j].pno;
-   					console.log("pno : " + data[j].pno);
+					break;
+					case 3:
+					td.innerHTML = "pno "  + data[j].pno;
+					console.log("pno : " + data[j].pno);
 					tr.appendChild(td);
-    				break;
-    			case 4:
-   					td.innerHTML = "prix "  + data[j].prix;
-   					console.log("prix : " + data[j].prix);
+					break;
+					case 4:
+					td.innerHTML = "prix "  + data[j].prix;
+					console.log("prix : " + data[j].prix);
 					tr.appendChild(td);
-    				break;
-    			case 5:
-   					td.innerHTML = "taille "  + data[j].taille;
-   					console.log("taille : " + data[j].taille);
+					break;
+					case 5:
+					td.innerHTML = "taille "  + data[j].taille;
+					console.log("taille : " + data[j].taille);
 					tr.appendChild(td);
-    				break;
-    			case 6:
-   					td.innerHTML = "uno "  + data[j].uno;
-   					console.log("uno : " + data[j].uno);	
+					break;
+					case 6:
+					td.innerHTML = "uno "  + data[j].uno;
+					console.log("uno : " + data[j].uno);	
 					tr.appendChild(td);
-    				break;
-    				default:
-    				td.innerHTML = "- " ;
+					break;
+					default:
+					td.innerHTML = "- " ;
 					tr.appendChild(td);
 				}
-					table.appendChild(tr);	
+				table.appendChild(tr);	
 			}
 
-					
+
 		}
 
-			$("#listeBieresBrasseur").html(table);
-		}
+		$("#listeBieresBrasseur").html(table);
+	}
 
-		$("#ajoutBiere").click(function(event){
-			event.preventDefault();
-			pageDepotBiere();
-		});
+	$("#ajoutBiere").click(function(event){
+		event.preventDefault();
+		pageDepotBiere();
+	});
 
-		$("#retouraccueil").click(function(event) {
-			event.preventDefault();
-            retourMenu();
-        });
+	$("#retouraccueil").click(function(event) {
+		event.preventDefault();
+		retourMenu();
+	});
 
-	</script>
+</script>
 </div>
