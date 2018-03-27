@@ -1,9 +1,9 @@
 <div>
 	<div class="container">
-        <div class="row col-md-4">
+		<div class="row col-md-4">
 			<div id="listeBieresBrasseur"></div>
 			<button type="button" id="acheterBiere" class="btn btn-default btn-block">Acheter une biere</button>
-            <button type="button" id="retouraccueil" class="btn btn-default btn-block">Menu</button>
+			<button type="button" id="retouraccueil" class="btn btn-default btn-block">Menu</button>
 			<div id="bloque">
 				<h1>Liste des commandes</h1>
 			</div>
@@ -11,96 +11,111 @@
 		</div>
 	</div>
 
-<!-- 	<script src="modifDansPages"></script> -->
+	<!-- 	<script src="modifDansPages"></script> -->
 	<script type="text/javascript">
+		var nom="a";
+		var prix=1;
 		$(document).ready(function(){
 			$.ajax({
-    url: "v1/CmdB",
-    data: {
-        id: 123
-    },
-    type: "GET",
-    dataType : "json",
-    success: function( json ) {
+				url: "v1/CmdB",
+				data: {
+					id: 123
+				},
+				type: "GET",
+				dataType : "json",
+				success: function( json ) {
 
-      var tab = JSON.stringify(json);
-      var res =JSON.parse(tab);
-      var tableau = "";
-      tableau +="<tr class =\"w3-green\"> <th> Bno </th><th> Quantité </th><th> Supprimer commande </th></tr>";
-      for (var i = 0;i<res.length;i++){
-        console.log(res[i].bno);
-             tableau +="<tr class =\"w3-white\"><td>"+res[i].bno+"</td><td>"+
+					var tab = JSON.stringify(json);
+					var res =JSON.parse(tab);
+					var tableau = "";
+					tableau +="<tr class =\"w3-green\"> <th> Nom </th><th> Quantité </th><th> Prix </th><th> Supprimer commande </th></tr>";
+					for (var i = 0;i<res.length;i++){
+						if(res[i].bno!=0 && res[i].bno!=1){
+							getBiere(res[i]);
+					      	// nom=biere.nom;
+					      	// prix=biere.prix*res[i].qte;
+					      	console.log(res[i].bno);
+					      	tableau +='<tr class="w3-white commande-'+res[i].cno+'"><td class="nom"></td><td>'+res[i].qte+"</td>"+
 
-             res[i].qte+"</td><td> <button class=\"supress\""+res[i].cno+" onCLick=\"SupprimerCommande("+res[i].cno+")\">Supprimer</button></td></tr>";
-             //$("#Commander"+res[i].bno).css("width","100%  ");
-    }
+					      	'<td class="prix">'+"</td><td> <button class=\"supress\""+res[i].cno+" onCLick=\"SupprimerCommande("+res[i].cno+")\">Supprimer</button></td></tr>";
+	             //$("#Commander"+res[i].bno).css("width","100%  ");
+	         			}
+	    			}
 
-        $("<table class=\"w3-table w3-striped w3-bordered\">" + tableau +"</table>").appendTo('#bloque');
-      
-    },
-    // Code to run if the request fails; the raw request and<input type=\"button\" value=\"Commander\" id=\"Commander\""+res[i].bno+"> 
-    // status codes are passed to the function
-    error: function( xhr, status, errorThrown ) {
-        alert( "Sorry, there was a problem!" );
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
-    },
-    // Code to run regardless of success or failure
-    complete: function( xhr, status ) {
-        console.log( "The request is complete!" );
-    }
-  });
+	     			$("<table class=\"w3-table w3-striped w3-bordered\">" + tableau +"</table>").appendTo('#bloque');
+
+	 			},
+			    // Code to run if the request fails; the raw request and<input type=\"button\" value=\"Commander\" id=\"Commander\""+res[i].bno+"> 
+			    // status codes are passed to the function
+			    error: function( xhr, status, errorThrown ) {
+			    	alert( "Sorry, there was a problem!" );
+			    	console.log( "Error: " + errorThrown );
+			    	console.log( "Status: " + status );
+			    	console.dir( xhr );
+			    },
+			    // Code to run regardless of success or failure
+			    complete: function( xhr, status ) {
+			    	console.log( "The request is complete!" );
+			    }
+			});
 
 		});
 
-		/*function listBieres() {
-			listUsersGeneric("v1/Biere");
-		}
 
 
-		function listUsersGeneric(url) {
-			$.getJSON(url, function(data) {
-				afficheListUsers(data);
+		function getBiere(commande){
+			$.ajax({
+				url: "v1/Biere/"+commande.bno,
+				data: {
+					id: 123
+				},
+				type: "GET",
+				dataType : "json",
+				success: function( json ) {
+					$('.commande-'+commande.cno+' td.nom').html(json.nom);
+					$('.commande-'+commande.cno+' td.prix').html(json.prix*commande.qte);
+				},
+			    // Code to run if the request fails; the raw request and<input type=\"button\" value=\"Commander\" id=\"Commander\""+res[i].bno+"> 
+			    // status codes are passed to the function
+			    error: function( xhr, status, errorThrown ) {
+			    	alert( "Sorry, there was a problem!" );
+			    	console.log( "Error: " + errorThrown );
+			    	console.log( "Status: " + status );
+			    	console.dir( xhr );
+			    },
+			    // Code to run regardless of success or failure
+			    complete: function( xhr, status ) {
+			    	console.log( "The request is complete!" );
+			    }
 			});
 		}
 
-		function afficheListUsers(data) {
-			var ul = document.createElement('ul');
-			ul.className = "list-group";
-			var index = 0;
-			for (index = 0; index < data.length; ++index) {
-			    var li = document.createElement('li');
-			    li.className = "list-group-item";
-				li.innerHTML = data[index].nom;
-				ul.appendChild(li);
-			}
-			$("#listeBieresBarman").html(ul);
-		}*/
+
+
 
 		function SupprimerCommande(cno){
 			$.ajax({
-    url: "/v1/CmdB/"+cno,
-    type: "DELETE",
-    dataType : "json",
-			 success: function( json ) {
+				url: "/v1/CmdB/"+cno,
+				type: "DELETE",
+				dataType : "json",
+				success: function( json ) {
 
-	 alert("truc supprimé :o");
+					alert("truc supprimé :o");
 
-    },
+				},
     // Code to run if the request fails; the raw request and
     // status codes are passed to the function
     error: function( xhr, status, errorThrown ) {
-        alert( "Sorry, there was a problem!" );
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
+    	alert( "Sorry, there was a problem!" );
+    	console.log( "Error: " + errorThrown );
+    	console.log( "Status: " + status );
+    	console.dir( xhr );
     },
     // Code to run regardless of success or failure
     complete: function( xhr, status ) {
-        console.log( "The request is complete!" );
+    	console.log( "The request is complete!" );
     }
-  });
+});
 		}
 
 		$("#acheterBiere").click(function(event){
@@ -110,8 +125,8 @@
 
 		$("#retouraccueil").click(function(event) {
 			event.preventDefault();
-            retourMenu();
-        });
+			retourMenu();
+		});
 
 	</script>
 </div>
