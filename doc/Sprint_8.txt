@@ -1,5 +1,12 @@
+Ce qui a réussi
+-Test reussi
+-Fonction stable
+
+Ce qui a ameliorer 
+-android 
+
 Ce que nous avons fait :
--Enormement de test reussi
+-Enormement de test
 -Des modifications de fonctionnement complémentaire 
 -
 

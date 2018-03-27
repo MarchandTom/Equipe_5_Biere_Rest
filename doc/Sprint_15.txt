@@ -1,3 +1,11 @@
+Ce qui a réussi
+-Docker qui a réussi
+-Tous les tests principaux fonctionnels
+
+Ce qu'on aurai du améliorer
+-Les promotions
+-Les fonctionnalités secondaires non implémenté
+
 Ce qu'on a fait
 -Mise en place des CSS et dde décors
 -Deploiement en cours de docker
