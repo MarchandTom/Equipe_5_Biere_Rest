@@ -52,6 +52,7 @@ public class BiereResource {
     public Biere getBiereByBno(@PathParam("bno")int bno) {
     	Biere biere = dao.findByBno(bno);
         if (biere == null) {
+        	logger.debug("il y a un bug 404 dans biere ressource");
             throw new WebApplicationException(404);
         }	
         System.out.println(biere);
